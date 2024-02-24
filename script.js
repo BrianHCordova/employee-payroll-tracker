@@ -4,23 +4,29 @@ const addEmployeeBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
 const collectEmployees = function() {
-  // TODO: Get user input to create and return an array of employee objects
   const employeeData = [];
+  let addMoreEmployees = true;
 
-  const firstName = prompt('Enter employee first name');
-  const lastName = prompt('Enter employee last name');
-  const salary = prompt('Enter employee salary');
+  while (addMoreEmployees) {
+    const firstName = prompt('Enter employee first name');
+    const lastName = prompt('Enter employee last name');
+    const salary = parseFloat(prompt('Enter employee salary'));
 
-  const employee = {
-    firstName: firstName,
-    lastName: lastName,
-    salary: salary
-  };
-
-  employeeData.push(employee);
-  console.log(employeeData);
+    const employee = {
+      firstName: firstName,
+      lastName: lastName,
+      salary: salary
+    };
+    employeeData.push(employee);
+    addMoreEmployees = confirm('Would you like to add another employee?');
+  }
+  return employeeData;
 }
-addEmployeeBtn.addEventListener('click', collectEmployees);
+
+addEmployeeBtn.addEventListener('click', function() {
+  const employees = collectEmployees();
+  displayEmployees(employees);
+});
 
 
 
